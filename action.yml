@@ -1,0 +1,15 @@
+# action.yml
+name: 'Observability CI Metrics'
+description: 'Checks for correct integration of the observability libraries. Uses the semgrep Docker image for matching code. Currently only works for OpenTelemetry in Go and Java.'
+inputs:
+  rules:  # id of input
+    description: 'Comma-separated list of semgrep rules which should be analyzed. If left empty, all rules will be analyzed.'
+    default: ''
+outputs:
+  analysis: # id of output
+    description: 'Key-value map with analysis results. Currently only counts rule matches.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.rules }}
